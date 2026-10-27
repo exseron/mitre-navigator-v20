@@ -49,7 +49,7 @@ function createWindow() {
     show: false,
     title: 'ATT&CK TTP Panel',
     backgroundColor: nativeTheme.shouldUseDarkColors ? '#0f1218' : '#f4f6fa',
-    icon: path.join(__dirname, '..', '..', 'build', 'icon.png'),
+    icon: path.join(__dirname, '..', '..', 'build', IS_WIN ? 'icon.ico' : 'icon.png'),
     ...platformWindowOptions(),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
