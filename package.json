@@ -13,7 +13,7 @@
     "data:build": "node scripts/build-attack-data.js",
     "build:win": "electron-builder --config windows/electron-builder.yml --win",
     "build:mac": "electron-builder --config mac/electron-builder.yml --mac",
-    "test": "node --test test/"
+    "test": "node --test \"test/**/*.test.js\""
   },
   "devDependencies": {
     "electron": "^45.0.0",
