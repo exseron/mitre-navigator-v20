@@ -1,6 +1,8 @@
 # Windows paketi: npm run build:win  (ya da windows\build.bat)
 appId: com.exseron.attack-ttp-panel
-productName: ATT&CK TTP Panel
+# Windows denetimlerinde "&" kısayol harfi olarak yorumlandığı için (ör. kurulum
+# sihirbazındaki "Çalıştır" kutusu) Windows sürümünde ad "&" içermez.
+productName: ATTACK TTP Panel
 copyright: Copyright © 2026 exseron — MITRE ATT&CK® © The MITRE Corporation
 
 directories:
@@ -33,7 +35,7 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: always
   createStartMenuShortcut: true
-  shortcutName: ATT&CK TTP Panel
+  shortcutName: ATTACK TTP Panel
   installerIcon: build/icon.ico
   uninstallerIcon: build/icon.ico
   installerLanguages: [tr_TR, en_US]
