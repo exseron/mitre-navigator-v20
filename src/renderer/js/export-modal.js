@@ -78,13 +78,6 @@
           [4, '4×'],
         ])}
         <p class="hint" id="export-size"></p>
-      </section>
-      <section class="panel-section">
-        <div class="export-actions">
-          <button class="btn btn--primary" data-export="png">PNG olarak kaydet <span class="kbd" style="background:transparent;color:inherit;border-color:rgba(255,255,255,.4)">${TTP.shortcut('Mod+Shift+P')}</span></button>
-          <button class="btn" data-export="svg">SVG (vektörel) olarak kaydet</button>
-          <button class="btn" data-export="clipboard">PNG'yi panoya kopyala</button>
-        </div>
         <p class="hint">SVG; PowerPoint, Word, Illustrator, Figma ve tarayıcılarda kayıpsız ölçeklenir.</p>
       </section>
       <section class="panel-section">
@@ -97,6 +90,13 @@
           <button class="btn btn--sm" data-export="copy-markdown">Markdown tablosunu kopyala</button>
         </div>
         <p class="hint">Taktik, teknik, değerlendirme (lejant) ve prosedürleri satır satır listeler.</p>
+      </section>
+      <section class="panel-section export-sticky">
+        <div class="export-actions">
+          <button class="btn btn--primary" data-export="png">PNG olarak kaydet <span class="kbd" style="background:transparent;color:inherit;border-color:rgba(255,255,255,.4)">${TTP.shortcut('Mod+Shift+P')}</span></button>
+          <button class="btn" data-export="svg">SVG (vektörel) olarak kaydet</button>
+          <button class="btn" data-export="clipboard">PNG'yi panoya kopyala</button>
+        </div>
       </section>`;
   }
 

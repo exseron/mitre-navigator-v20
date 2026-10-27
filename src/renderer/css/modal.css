@@ -188,3 +188,13 @@
     opacity: 0;
   }
 }
+
+/* Kaydet düğmeleri seçenekler kaydırılsa da görünür kalır */
+.export-sticky {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background: var(--bg-elev);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.05);
+}
