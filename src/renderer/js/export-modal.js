@@ -76,6 +76,17 @@
           <button class="btn" data-export="clipboard">PNG'yi panoya kopyala</button>
         </div>
         <p class="hint">SVG; PowerPoint, Word, Illustrator, Figma ve tarayıcılarda kayıpsız ölçeklenir.</p>
+      </section>
+      <section class="panel-section">
+        <h3 class="panel-title">Rapor tablosu</h3>
+        <div class="export-actions">
+          <div class="row">
+            <button class="btn btn--sm" style="flex:1" data-export="markdown">Markdown (.md)</button>
+            <button class="btn btn--sm" style="flex:1" data-export="csv">CSV (Excel)</button>
+          </div>
+          <button class="btn btn--sm" data-export="copy-markdown">Markdown tablosunu kopyala</button>
+        </div>
+        <p class="hint">Taktik, teknik, değerlendirme (lejant) ve prosedürleri satır satır listeler.</p>
       </section>`;
   }
 
@@ -196,6 +207,27 @@
     }
   }
 
+  function hasSelection() {
+    const s = store.stats();
+    if (s.techniques + s.subs) return true;
+    TTP.toast('Tablo için önce en az bir teknik seçin.', { type: 'error' });
+    return false;
+  }
+
+  async function exportTable(kind) {
+    if (!hasSelection()) return;
+    const doc = store.state.doc;
+    if (kind === 'copy-markdown') {
+      await navigator.clipboard.writeText(TTP.tableExport.toMarkdown(doc));
+      return TTP.toast('Markdown tablosu panoya kopyalandı.');
+    }
+    const md = kind === 'markdown';
+    const text = md ? TTP.tableExport.toMarkdown(doc) : TTP.tableExport.toCsv(doc);
+    const name = baseName() + (md ? '.md' : '.csv');
+    const saved = await files.saveText(name, text, md ? files.FILTERS.markdown : files.FILTERS.csv, md ? 'text/markdown' : 'text/csv');
+    if (saved) TTP.toast(`Tablo kaydedildi: ${files.basename(saved)}`, revealAction(saved));
+  }
+
   function revealAction(saved) {
     return window.desktop && saved && /[\\/]/.test(saved)
       ? { action: { label: 'Klasörde göster', run: () => window.desktop.reveal(saved) }, timeout: 5000 }
@@ -221,9 +253,8 @@
     const exp = e.target.closest('[data-export]');
     if (exp) {
       const kind = exp.dataset.export;
-      if (kind === 'png') exportPng();
-      else if (kind === 'svg') exportSvg();
-      else copyPng();
+      const run = { png: exportPng, svg: exportSvg, clipboard: copyPng }[kind] || (() => exportTable(kind));
+      Promise.resolve(run()).catch((err) => TTP.toast('Dışa aktarma başarısız: ' + err.message, { type: 'error' }));
     }
   });
 

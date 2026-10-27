@@ -13,6 +13,8 @@
     layer: [{ name: 'ATT&CK Navigator Katmanı', extensions: ['json'] }],
     png: [{ name: 'PNG Görseli', extensions: ['png'] }],
     svg: [{ name: 'SVG Vektörel Görsel', extensions: ['svg'] }],
+    markdown: [{ name: 'Markdown Tablosu', extensions: ['md'] }],
+    csv: [{ name: 'CSV (Excel)', extensions: ['csv'] }],
   };
 
   function downloadBlob(name, blob) {
