@@ -130,10 +130,12 @@
     const action = act ? act.dataset.act : 'toggle';
 
     if (action === 'expand') {
-      const open = new Set(store.state.ui.open);
-      if (open.has(tid) || store.state.ui.showSubs) open.delete(tid);
+      const { ui } = store.state;
+      // "Tüm alt teknikler açık" modundan tek bir listeyi kapatmak: diğerleri açık kalır
+      const open = ui.showSubs ? new Set(data.children.keys()) : new Set(ui.open);
+      if (open.has(tid)) open.delete(tid);
       else open.add(tid);
-      store.setUi({ open, showSubs: store.state.ui.showSubs && open.has(tid) ? true : false }, 'matrix');
+      store.setUi({ open, showSubs: false }, 'matrix');
       return;
     }
     if (action === 'info' || e.shiftKey) {
