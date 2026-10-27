@@ -10,12 +10,12 @@
   },
   "legend": [
     {
-      "id": "mvr3ys4lueydw2",
+      "id": "mvr44ewqf6zceb",
       "color": "#e5484d",
       "label": "Gözlemlendi (yüksek güven)"
     },
     {
-      "id": "mvr3ys4l0bsfet",
+      "id": "mvr44ewq9n6s8b",
       "color": "#f5a524",
       "label": "Şüpheli (orta güven)"
     }
@@ -30,7 +30,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys530qt7fp",
+          "id": "mvr44ex9tv6un2",
           "text": "Fatura temalı e-postalarla parola korumalı ZIP içinde ISO dosyası gönderildi.",
           "source": "IR-2026-031"
         }
@@ -43,7 +43,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys5ce4f0wy",
+          "id": "mvr44exoxa84ks",
           "text": "Kullanıcı, ISO içindeki PDF görünümlü LNK dosyasını çalıştırdı.",
           "source": "IR-2026-031"
         }
@@ -56,7 +56,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys5lgfxksh",
+          "id": "mvr44ey70e7som",
           "text": "LNK dosyası, base64 kodlu PowerShell ile ikinci aşama yükleyiciyi indirdi.",
           "source": "EDR telemetrisi"
         }
@@ -69,7 +69,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys5virlvz3",
+          "id": "mvr44eymlu7289",
           "text": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run altına \"OneDriveSync\" kaydı eklendi.",
           "source": "EDR telemetrisi"
         }
@@ -82,7 +82,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys66e62i2i",
+          "id": "mvr44ez155pahr",
           "text": "Defender gerçek zamanlı korumasının PowerShell ile kapatıldığı değerlendiriliyor.",
           "source": "Analist değerlendirmesi"
         }
@@ -95,7 +95,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys6ettj9xd",
+          "id": "mvr44ezanv50bs",
           "text": "comsvcs.dll MiniDump ile LSASS bellek dökümü alındığına dair izler bulundu.",
           "source": "Adli bilişim"
         }
@@ -108,7 +108,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys6qvht0oy",
+          "id": "mvr44ezo9levk5",
           "text": "AdFind ile etki alanı bilgisayarları listelendi.",
           "source": "Komut satırı kayıtları"
         }
@@ -121,7 +121,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys6zhu6rrg",
+          "id": "mvr44ezx3mhfiq",
           "text": "Ele geçirilen etki alanı yöneticisi hesabıyla RDP üzerinden yatay hareket edildi.",
           "source": "Güvenlik olay günlükleri"
         }
@@ -134,7 +134,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys77r50icw",
+          "id": "mvr44f06a91s3w",
           "text": "HTTPS üzerinden Cobalt Strike beacon iletişimi tespit edildi.",
           "source": "Proxy kayıtları"
         }
@@ -147,7 +147,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys7fz1hofm",
+          "id": "mvr44f0f4c3i4q",
           "text": "Araçlar C2 sunucusundan certutil ile indirildi.",
           "source": "EDR telemetrisi"
         }
@@ -160,7 +160,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys7pdtgt7n",
+          "id": "mvr44f0ojnvvqm",
           "text": "rclone ile yaklaşık 180 GB veri bulut depolamaya sızdırıldı.",
           "source": "Güvenlik duvarı kayıtları"
         }
@@ -173,7 +173,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys7yrsjntu",
+          "id": "mvr44f0znqa6fa",
           "text": "vssadmin ile birim gölge kopyaları silindi.",
           "source": "EDR telemetrisi"
         }
@@ -186,7 +186,7 @@
       ],
       "procedures": [
         {
-          "id": "mvr3ys87nesz7f",
+          "id": "mvr44f1b3g6x0r",
           "text": "Windows ve ESXi sunucularında dosyalar şifrelendi; fidye notu bırakıldı.",
           "source": "IR-2026-031"
         }
@@ -198,6 +198,7 @@
     "theme": "light",
     "showProcedures": true,
     "showProcedureSource": true,
+    "procedureLines": 0,
     "showIds": true,
     "showKillChain": true,
     "showLegend": true,
@@ -209,5 +210,5 @@
     "pngScale": 2,
     "transparent": false
   },
-  "savedAt": "2026-10-27T19:58:31.031Z"
+  "savedAt": "2026-10-27T20:02:53.875Z"
 }
