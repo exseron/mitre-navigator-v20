@@ -23,8 +23,10 @@
     const it = doc.items[t.id];
     const selected = store.isSelected(t.id, tactic);
     const subs = t.sub ? [] : data.children.get(t.id) || [];
-    const open = subs.length && (opts.forceOpen || ui.showSubs || ui.open.has(t.id));
     const selectedSub = subs.find((s) => store.isSelected(s.id, tactic));
+    // Seçili alt tekniği olan teknikler, kullanıcı kapatmadıkça açık gösterilir
+    const open =
+      subs.length && (opts.forceOpen || (!ui.closed.has(t.id) && (ui.showSubs || ui.open.has(t.id) || !!selectedSub)));
     const procs = it ? it.procedures.length : 0;
 
     const cls = ['tcell'];
@@ -131,11 +133,16 @@
 
     if (action === 'expand') {
       const { ui } = store.state;
-      // "Tüm alt teknikler açık" modundan tek bir listeyi kapatmak: diğerleri açık kalır
-      const open = ui.showSubs ? new Set(data.children.keys()) : new Set(ui.open);
-      if (open.has(tid)) open.delete(tid);
-      else open.add(tid);
-      store.setUi({ open, showSubs: false }, 'matrix');
+      const open = new Set(ui.open);
+      const closed = new Set(ui.closed);
+      if (cell.classList.contains('is-open')) {
+        open.delete(tid);
+        closed.add(tid);
+      } else {
+        closed.delete(tid);
+        open.add(tid);
+      }
+      store.setUi({ open, closed }, 'matrix');
       return;
     }
     if (action === 'info' || e.shiftKey) {

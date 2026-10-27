@@ -64,7 +64,8 @@
       onlySelected: false,
       showSubs: false,
       across: false,
-      open: new Set(), // açılmış alt teknik listeleri
+      open: new Set(), // elle açılmış alt teknik listeleri
+      closed: new Set(), // elle kapatılmış alt teknik listeleri
       theme: 'auto',
     },
     file: { path: null, name: null, dirty: false },

@@ -197,7 +197,7 @@
       TTP.toast('Tüm seçimler temizlendi.', { action: { label: 'Geri al', run: () => store.undo() } });
     },
     toggleOnlySelected: () => store.setUi({ onlySelected: !store.state.ui.onlySelected }),
-    toggleSubs: () => store.setUi({ showSubs: !store.state.ui.showSubs, open: new Set() }),
+    toggleSubs: () => store.setUi({ showSubs: !store.state.ui.showSubs, open: new Set(), closed: new Set() }),
   };
 
   function run(action) {
@@ -219,7 +219,7 @@
   document.querySelectorAll('[data-view]').forEach((b) =>
     b.addEventListener('click', () => store.setUi({ onlySelected: b.dataset.view === 'selected' }))
   );
-  optSubs.addEventListener('change', () => store.setUi({ showSubs: optSubs.checked, open: new Set() }));
+  optSubs.addEventListener('change', () => store.setUi({ showSubs: optSubs.checked, open: new Set(), closed: new Set() }));
   optAcross.addEventListener('change', () => store.setUi({ across: optAcross.checked }));
 
   const applySearch = TTP.debounce(() => store.setUi({ search: searchInput.value }, 'search'), 120);

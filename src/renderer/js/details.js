@@ -239,7 +239,9 @@
         if (store.isSelected(sid)) store.setTechniqueTactics(sid, []);
         else store.selectTechnique(sid, store.state.ui.focusTactic);
       } else {
-        store.setUi({ focus: sid, open: new Set([...store.state.ui.open, tid]) });
+        const closed = new Set(store.state.ui.closed);
+        closed.delete(tid);
+        store.setUi({ focus: sid, open: new Set([...store.state.ui.open, tid]), closed });
         TTP.matrix.reveal(sid);
       }
     }
