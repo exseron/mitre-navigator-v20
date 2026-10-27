@@ -17,9 +17,8 @@ let pendingFile = null;
 let rendererReady = false;
 
 // Tek örnek: ikinci kez açılan uygulama dosyasını mevcut pencereye iletir
-if (!app.requestSingleInstanceLock()) {
-  app.quit();
-}
+const gotLock = app.requestSingleInstanceLock();
+if (!gotLock) app.quit();
 
 function platformWindowOptions() {
   if (IS_MAC) {
@@ -207,6 +206,7 @@ nativeTheme.on('updated', () => {
 /* ------------------------------------------------------------ lifecycle */
 
 app.whenReady().then(() => {
+  if (!gotLock) return;
   if (!IS_MAC) pendingFile = pendingFile || fileFromArgv(process.argv);
   buildMenu({ isMac: IS_MAC, send: sendMenuAction });
   createWindow();
