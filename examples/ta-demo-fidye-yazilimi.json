@@ -1,0 +1,213 @@
+{
+  "format": "attack-ttp-panel",
+  "formatVersion": 1,
+  "attackVersion": "20.0",
+  "meta": {
+    "title": "TA-DEMO Fidye Yazılımı Operasyonu",
+    "subtitle": "Kurgusal tehdit aktörü · Örnek CTI çalışması",
+    "description": "Fatura temalı kimlik avı ile başlayan ve şifreleme ile sonuçlanan saldırı zincirinin gözlemlenen TTP'leri. Bu proje panelin kullanımını göstermek için hazırlanmış kurgusal bir örnektir.",
+    "author": "CTI Ekibi"
+  },
+  "legend": [
+    {
+      "id": "mvr3ys4lueydw2",
+      "color": "#e5484d",
+      "label": "Gözlemlendi (yüksek güven)"
+    },
+    {
+      "id": "mvr3ys4l0bsfet",
+      "color": "#f5a524",
+      "label": "Şüpheli (orta güven)"
+    }
+  ],
+  "activeColor": "#e5484d",
+  "tactics": {},
+  "items": {
+    "T1566.001": {
+      "color": "#e5484d",
+      "tactics": [
+        "initial-access"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys530qt7fp",
+          "text": "Fatura temalı e-postalarla parola korumalı ZIP içinde ISO dosyası gönderildi.",
+          "source": "IR-2026-031"
+        }
+      ]
+    },
+    "T1204.002": {
+      "color": "#e5484d",
+      "tactics": [
+        "execution"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys5ce4f0wy",
+          "text": "Kullanıcı, ISO içindeki PDF görünümlü LNK dosyasını çalıştırdı.",
+          "source": "IR-2026-031"
+        }
+      ]
+    },
+    "T1059.001": {
+      "color": "#e5484d",
+      "tactics": [
+        "execution"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys5lgfxksh",
+          "text": "LNK dosyası, base64 kodlu PowerShell ile ikinci aşama yükleyiciyi indirdi.",
+          "source": "EDR telemetrisi"
+        }
+      ]
+    },
+    "T1547.001": {
+      "color": "#e5484d",
+      "tactics": [
+        "persistence"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys5virlvz3",
+          "text": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run altına \"OneDriveSync\" kaydı eklendi.",
+          "source": "EDR telemetrisi"
+        }
+      ]
+    },
+    "T1685": {
+      "color": "#f5a524",
+      "tactics": [
+        "defense-impairment"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys66e62i2i",
+          "text": "Defender gerçek zamanlı korumasının PowerShell ile kapatıldığı değerlendiriliyor.",
+          "source": "Analist değerlendirmesi"
+        }
+      ]
+    },
+    "T1003.001": {
+      "color": "#f5a524",
+      "tactics": [
+        "credential-access"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys6ettj9xd",
+          "text": "comsvcs.dll MiniDump ile LSASS bellek dökümü alındığına dair izler bulundu.",
+          "source": "Adli bilişim"
+        }
+      ]
+    },
+    "T1018": {
+      "color": "#e5484d",
+      "tactics": [
+        "discovery"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys6qvht0oy",
+          "text": "AdFind ile etki alanı bilgisayarları listelendi.",
+          "source": "Komut satırı kayıtları"
+        }
+      ]
+    },
+    "T1021.001": {
+      "color": "#e5484d",
+      "tactics": [
+        "lateral-movement"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys6zhu6rrg",
+          "text": "Ele geçirilen etki alanı yöneticisi hesabıyla RDP üzerinden yatay hareket edildi.",
+          "source": "Güvenlik olay günlükleri"
+        }
+      ]
+    },
+    "T1071.001": {
+      "color": "#e5484d",
+      "tactics": [
+        "command-and-control"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys77r50icw",
+          "text": "HTTPS üzerinden Cobalt Strike beacon iletişimi tespit edildi.",
+          "source": "Proxy kayıtları"
+        }
+      ]
+    },
+    "T1105": {
+      "color": "#e5484d",
+      "tactics": [
+        "command-and-control"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys7fz1hofm",
+          "text": "Araçlar C2 sunucusundan certutil ile indirildi.",
+          "source": "EDR telemetrisi"
+        }
+      ]
+    },
+    "T1567.002": {
+      "color": "#e5484d",
+      "tactics": [
+        "exfiltration"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys7pdtgt7n",
+          "text": "rclone ile yaklaşık 180 GB veri bulut depolamaya sızdırıldı.",
+          "source": "Güvenlik duvarı kayıtları"
+        }
+      ]
+    },
+    "T1490": {
+      "color": "#e5484d",
+      "tactics": [
+        "impact"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys7yrsjntu",
+          "text": "vssadmin ile birim gölge kopyaları silindi.",
+          "source": "EDR telemetrisi"
+        }
+      ]
+    },
+    "T1486": {
+      "color": "#e5484d",
+      "tactics": [
+        "impact"
+      ],
+      "procedures": [
+        {
+          "id": "mvr3ys87nesz7f",
+          "text": "Windows ve ESXi sunucularında dosyalar şifrelendi; fidye notu bırakıldı.",
+          "source": "IR-2026-031"
+        }
+      ]
+    }
+  },
+  "exportOptions": {
+    "layout": "matrix",
+    "theme": "light",
+    "showProcedures": true,
+    "showProcedureSource": true,
+    "showIds": true,
+    "showKillChain": true,
+    "showLegend": true,
+    "showHeader": true,
+    "showFooter": true,
+    "showEmptyTactics": false,
+    "showDescriptions": false,
+    "columnWidth": 260,
+    "pngScale": 2,
+    "transparent": false
+  },
+  "savedAt": "2026-10-27T19:58:31.031Z"
+}
