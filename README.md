@@ -53,12 +53,16 @@ toplanan alt teknikler ve kaynaklarıyla birlikte prosedürler.
   başlık/özet, kill chain şeridi, prosedürler, kaynaklar, ID'ler, açıklamalar, lejant, alt bilgi.
 - **PNG** (1×–4× çözünürlük), **SVG** (PowerPoint, Word, Illustrator, Figma'da kayıpsız) ve
   **panoya kopyala**.
+- Uzun prosedürleri 1/2/4 satıra kısaltma — büyük profillerde görsel kompakt kalır.
+- **Rapor tablosu:** seçili TTP'leri Markdown (.md) veya CSV (Excel) olarak kaydedin
+  ya da Markdown tablosunu panoya kopyalayıp rapora/wiki'ye yapıştırın.
 - **ATT&CK Navigator** katmanı (layer 4.5) içe/dışa aktarma — renkler, taktik bazlı
   seçimler, lejant ve prosedürler korunur.
 
 **Proje**
 - Projeler `.json` olarak kaydedilir; çalışma her değişiklikte otomatik saklanır.
 - Geri al / yinele, sürükle-bırak ile dosya açma, açık/koyu/sistem teması.
+- Pencere boyutu ve konumu hatırlanır.
 
 ## Hızlı başlangıç
 
@@ -131,6 +135,7 @@ src/main/            Electron ana süreç (pencere, menü, dosya diyalogları, p
 src/renderer/        Arayüz (HTML/CSS/JS), görsel üretici ve ATT&CK verisi
   js/exporter.js     Seçimlerden SVG/PNG görsel üretimi
   js/layer-io.js     Proje ve ATT&CK Navigator katmanı dönüşümleri
+  js/table-export.js Markdown / CSV rapor tablosu
   js/store.js        Durum, geri al/yinele, otomatik kayıt
 scripts/             STIX → panel verisi dönüştürücü
 windows/             Windows paketleme ayarları ve .bat betikleri

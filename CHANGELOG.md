@@ -10,9 +10,10 @@
 - Teknik başına prosedür ve kaynak yönetimi; MITRE prosedür örneklerini tek tıkla ekleme.
 - Tehdit profili içe aktarma (grup, kampanya, yazılım).
 - Yalnızca seçilenleri gösteren görsel: matris ve rapor akışı düzenleri, açık/koyu tema,
-  PNG (1×–4×), SVG ve panoya kopyalama.
+  PNG (1×–4×), SVG ve panoya kopyalama; prosedür uzunluğu sınırı.
+- Rapor tablosu: Markdown ve CSV dışa aktarma.
 - ATT&CK Navigator katmanı (4.5) içe/dışa aktarma.
-- Proje kaydetme/açma, otomatik kayıt, geri al/yinele.
+- Proje kaydetme/açma, otomatik kayıt, geri al/yinele; pencere konumu hatırlanır.
 - Windows sürümü: NSIS kurulum (x64/ARM64), taşınabilir .exe, overlay başlık çubuğu.
 - macOS sürümü: Universal DMG, entegre trafik ışıkları, yerel uygulama menüsü.
 - GitHub Actions ile otomatik Windows ve macOS derlemesi.
