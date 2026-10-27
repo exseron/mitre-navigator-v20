@@ -4,6 +4,7 @@ const { app, BrowserWindow, ipcMain, dialog, shell, nativeTheme } = require('ele
 const fs = require('fs');
 const path = require('path');
 const { buildMenu } = require('./menu');
+const { windowState } = require('./window-state');
 
 const IS_MAC = process.platform === 'darwin';
 const IS_WIN = process.platform === 'win32';
@@ -48,9 +49,9 @@ function overlayColors() {
 }
 
 function createWindow() {
+  const state = windowState({ width: 1520, height: 940 });
   mainWindow = new BrowserWindow({
-    width: 1520,
-    height: 940,
+    ...state.bounds,
     minWidth: 1080,
     minHeight: 680,
     show: false,
@@ -67,6 +68,7 @@ function createWindow() {
     },
   });
 
+  state.track(mainWindow);
   mainWindow.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
   mainWindow.once('ready-to-show', () => mainWindow.show());
 
