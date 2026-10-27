@@ -1,0 +1,55 @@
+# macOS paketi: npm run build:mac  (ya da mac/build.sh)
+appId: com.exseron.attack-ttp-panel
+productName: ATT&CK TTP Panel
+copyright: Copyright © 2026 exseron — MITRE ATT&CK® © The MITRE Corporation
+
+directories:
+  output: dist/mac
+  buildResources: build
+
+files:
+  - src/**/*
+  - build/icon.png
+  - package.json
+  - "!**/*.map"
+
+mac:
+  icon: build/icon.png
+  category: public.app-category.productivity
+  # Apple Silicon ve Intel Mac'lerde yerel çalışan tek paket
+  target:
+    - target: dmg
+      arch: [universal]
+    - target: zip
+      arch: [universal]
+  artifactName: ATTACK-TTP-Panel-${version}-mac-${arch}.${ext}
+  darkModeSupport: true
+  minimumSystemVersion: "12.0"
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: mac/entitlements.mac.plist
+  entitlementsInherit: mac/entitlements.mac.plist
+  # "-" = ad-hoc imza (Apple Developer hesabı gerekmez, Apple Silicon'da açılabilmesi için şart).
+  # Developer ID ile imzalamak için: MAC_SIGN_IDENTITY="Developer ID Application: ..." ./mac/build.sh
+  identity: "-"
+  extendInfo:
+    NSHumanReadableCopyright: MITRE ATT&CK® © The MITRE Corporation
+    CFBundleDocumentTypes:
+      - CFBundleTypeName: ATT&CK TTP Panel Projesi
+        CFBundleTypeRole: Editor
+        LSHandlerRank: Alternate
+        LSItemContentTypes: [public.json]
+
+dmg:
+  title: ATT&CK TTP Panel ${version}
+  icon: build/icon.png
+  window:
+    width: 540
+    height: 380
+  contents:
+    - x: 140
+      y: 190
+    - x: 400
+      y: 190
+      type: link
+      path: /Applications
