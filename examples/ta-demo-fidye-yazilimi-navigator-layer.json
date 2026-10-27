@@ -1,0 +1,322 @@
+{
+  "name": "TA-DEMO Fidye Yazılımı Operasyonu",
+  "versions": {
+    "attack": "20",
+    "navigator": "5.1.0",
+    "layer": "4.5"
+  },
+  "domain": "enterprise-attack",
+  "description": "Kurgusal tehdit aktörü · Örnek CTI çalışması\n\nFatura temalı kimlik avı ile başlayan ve şifreleme ile sonuçlanan saldırı zincirinin gözlemlenen TTP'leri. Bu proje panelin kullanımını göstermek için hazırlanmış kurgusal bir örnektir.",
+  "filters": {},
+  "sorting": 0,
+  "layout": {
+    "layout": "side",
+    "aggregateFunction": "average",
+    "showID": true,
+    "showName": true,
+    "showAggregateScores": false,
+    "countUnscored": false,
+    "expandedSubtechniques": "annotated"
+  },
+  "hideDisabled": false,
+  "techniques": [
+    {
+      "techniqueID": "T1566.001",
+      "tactic": "initial-access",
+      "color": "#e5484d",
+      "comment": "Fatura temalı e-postalarla parola korumalı ZIP içinde ISO dosyası gönderildi. [IR-2026-031]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "Fatura temalı e-postalarla parola korumalı ZIP içinde ISO dosyası gönderildi. [IR-2026-031]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1204.002",
+      "tactic": "execution",
+      "color": "#e5484d",
+      "comment": "Kullanıcı, ISO içindeki PDF görünümlü LNK dosyasını çalıştırdı. [IR-2026-031]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "Kullanıcı, ISO içindeki PDF görünümlü LNK dosyasını çalıştırdı. [IR-2026-031]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1059.001",
+      "tactic": "execution",
+      "color": "#e5484d",
+      "comment": "LNK dosyası, base64 kodlu PowerShell ile ikinci aşama yükleyiciyi indirdi. [EDR telemetrisi]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "LNK dosyası, base64 kodlu PowerShell ile ikinci aşama yükleyiciyi indirdi. [EDR telemetrisi]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1547.001",
+      "tactic": "persistence",
+      "color": "#e5484d",
+      "comment": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run altına \"OneDriveSync\" kaydı eklendi. [EDR telemetrisi]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run altına \"OneDriveSync\" kaydı eklendi. [EDR telemetrisi]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1685",
+      "tactic": "defense-impairment",
+      "color": "#f5a524",
+      "comment": "Defender gerçek zamanlı korumasının PowerShell ile kapatıldığı değerlendiriliyor. [Analist değerlendirmesi]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "Defender gerçek zamanlı korumasının PowerShell ile kapatıldığı değerlendiriliyor. [Analist değerlendirmesi]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1003.001",
+      "tactic": "credential-access",
+      "color": "#f5a524",
+      "comment": "comsvcs.dll MiniDump ile LSASS bellek dökümü alındığına dair izler bulundu. [Adli bilişim]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "comsvcs.dll MiniDump ile LSASS bellek dökümü alındığına dair izler bulundu. [Adli bilişim]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1018",
+      "tactic": "discovery",
+      "color": "#e5484d",
+      "comment": "AdFind ile etki alanı bilgisayarları listelendi. [Komut satırı kayıtları]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "AdFind ile etki alanı bilgisayarları listelendi. [Komut satırı kayıtları]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1021.001",
+      "tactic": "lateral-movement",
+      "color": "#e5484d",
+      "comment": "Ele geçirilen etki alanı yöneticisi hesabıyla RDP üzerinden yatay hareket edildi. [Güvenlik olay günlükleri]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "Ele geçirilen etki alanı yöneticisi hesabıyla RDP üzerinden yatay hareket edildi. [Güvenlik olay günlükleri]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1071.001",
+      "tactic": "command-and-control",
+      "color": "#e5484d",
+      "comment": "HTTPS üzerinden Cobalt Strike beacon iletişimi tespit edildi. [Proxy kayıtları]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "HTTPS üzerinden Cobalt Strike beacon iletişimi tespit edildi. [Proxy kayıtları]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1105",
+      "tactic": "command-and-control",
+      "color": "#e5484d",
+      "comment": "Araçlar C2 sunucusundan certutil ile indirildi. [EDR telemetrisi]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "Araçlar C2 sunucusundan certutil ile indirildi. [EDR telemetrisi]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1567.002",
+      "tactic": "exfiltration",
+      "color": "#e5484d",
+      "comment": "rclone ile yaklaşık 180 GB veri bulut depolamaya sızdırıldı. [Güvenlik duvarı kayıtları]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "rclone ile yaklaşık 180 GB veri bulut depolamaya sızdırıldı. [Güvenlik duvarı kayıtları]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1490",
+      "tactic": "impact",
+      "color": "#e5484d",
+      "comment": "vssadmin ile birim gölge kopyaları silindi. [EDR telemetrisi]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "vssadmin ile birim gölge kopyaları silindi. [EDR telemetrisi]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1486",
+      "tactic": "impact",
+      "color": "#e5484d",
+      "comment": "Windows ve ESXi sunucularında dosyalar şifrelendi; fidye notu bırakıldı. [IR-2026-031]",
+      "enabled": true,
+      "metadata": [
+        {
+          "name": "procedure",
+          "value": "Windows ve ESXi sunucularında dosyalar şifrelendi; fidye notu bırakıldı. [IR-2026-031]"
+        }
+      ],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1566",
+      "tactic": "initial-access",
+      "enabled": true,
+      "metadata": [],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1204",
+      "tactic": "execution",
+      "enabled": true,
+      "metadata": [],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1059",
+      "tactic": "execution",
+      "enabled": true,
+      "metadata": [],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1547",
+      "tactic": "persistence",
+      "enabled": true,
+      "metadata": [],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1547",
+      "tactic": "privilege-escalation",
+      "enabled": true,
+      "metadata": [],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1003",
+      "tactic": "credential-access",
+      "enabled": true,
+      "metadata": [],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1021",
+      "tactic": "lateral-movement",
+      "enabled": true,
+      "metadata": [],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1071",
+      "tactic": "command-and-control",
+      "enabled": true,
+      "metadata": [],
+      "links": [],
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1567",
+      "tactic": "exfiltration",
+      "enabled": true,
+      "metadata": [],
+      "links": [],
+      "showSubtechniques": true
+    }
+  ],
+  "gradient": {
+    "colors": [
+      "#ff6666ff",
+      "#ffe766ff",
+      "#8ec843ff"
+    ],
+    "minValue": 0,
+    "maxValue": 100
+  },
+  "legendItems": [
+    {
+      "label": "Gözlemlendi (yüksek güven)",
+      "color": "#e5484d"
+    },
+    {
+      "label": "Şüpheli (orta güven)",
+      "color": "#f5a524"
+    }
+  ],
+  "metadata": [
+    {
+      "name": "author",
+      "value": "CTI Ekibi"
+    }
+  ],
+  "links": [],
+  "showTacticRowBackground": false,
+  "tacticRowBackground": "#dddddd",
+  "selectTechniquesAcrossTactics": false,
+  "selectSubtechniquesWithParent": false,
+  "selectVisibleTechniques": false
+}

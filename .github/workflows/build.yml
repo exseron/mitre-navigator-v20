@@ -1,0 +1,85 @@
+name: Build
+
+# Windows (.exe) ve macOS (.dmg) paketlerini derler.
+# "v*" etiketi gönderildiğinde (ör. git tag v1.0.0 && git push --tags)
+# paketler otomatik olarak bir GitHub Release'e eklenir.
+on:
+  push:
+    branches: [main, 'claude/**']
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+        env:
+          ELECTRON_SKIP_BINARY_DOWNLOAD: '1'
+      - run: npm test
+
+  windows:
+    needs: test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build:win -- --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: attack-ttp-panel-windows
+          path: |
+            dist/windows/*.exe
+            dist/windows/*.zip
+          if-no-files-found: error
+
+  mac:
+    needs: test
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build:mac -- --publish never
+        env:
+          # Developer ID sertifikası yoksa ad-hoc imza kullanılır (mac/electron-builder.yml)
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: attack-ttp-panel-mac
+          path: |
+            dist/mac/*.dmg
+            dist/mac/*.zip
+          if-no-files-found: error
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [windows, mac]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*
+          generate_release_notes: true

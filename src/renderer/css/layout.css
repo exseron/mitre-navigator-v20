@@ -1,0 +1,198 @@
+/* ---------------------------------------------------------------- titlebar */
+.titlebar {
+  --tb-height: 52px;
+  height: var(--tb-height);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 12px 0 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.titlebar button,
+.titlebar input {
+  -webkit-app-region: no-drag;
+}
+
+/* macOS: trafik ışıkları için boşluk (hiddenInset) */
+.titlebar__traffic {
+  display: none;
+  width: 64px;
+  flex: none;
+}
+
+body.platform-darwin.is-desktop .titlebar__traffic {
+  display: block;
+}
+
+/* Windows: titleBarOverlay pencere düğmeleri için boşluk */
+.titlebar__overlay {
+  display: none;
+  width: 138px;
+  flex: none;
+}
+
+body.platform-win32.is-desktop .titlebar__overlay {
+  display: block;
+}
+
+body.platform-win32.is-desktop .titlebar {
+  padding-right: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+
+.brand__mark {
+  width: 22px;
+  height: 22px;
+  color: var(--text);
+}
+
+.brand__name {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+}
+
+.brand__version {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+
+.titlebar__doc {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text-2);
+}
+
+.doc-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.doc-dirty {
+  color: var(--accent);
+  font-size: 10px;
+  visibility: hidden;
+}
+
+.doc-dirty.is-visible {
+  visibility: visible;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+}
+
+.tb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 9px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.tb-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.tb-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tb-btn--primary {
+  margin-left: 6px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  padding: 0 13px;
+}
+
+.tb-btn--primary:hover {
+  background: var(--accent-2);
+  color: #fff;
+}
+
+.tb-sep {
+  width: 1px;
+  height: 20px;
+  margin: 0 6px;
+  background: var(--border);
+}
+
+/* --------------------------------------------------------------- workspace */
+.workspace {
+  height: calc(100% - 52px);
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr) 380px;
+}
+
+.workspace.no-details {
+  grid-template-columns: 300px minmax(0, 1fr) 0;
+}
+
+.sidebar,
+.details {
+  min-height: 0;
+  overflow-y: auto;
+  background: var(--bg-elev);
+}
+
+.sidebar {
+  border-right: 1px solid var(--border);
+}
+
+.details {
+  border-left: 1px solid var(--border);
+}
+
+.matrix-area {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1300px) {
+  .workspace {
+    grid-template-columns: 270px minmax(0, 1fr) 330px;
+  }
+  .tb-btn span {
+    display: none;
+  }
+  .tb-btn--primary span {
+    display: inline;
+  }
+}

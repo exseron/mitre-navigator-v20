@@ -1,0 +1,22 @@
+{
+  "name": "attack-ttp-panel",
+  "productName": "ATT&CK TTP Panel",
+  "version": "1.0.0",
+  "description": "MITRE ATT&CK v20 tabanlı TTP seçme, renklendirme ve PNG/SVG dışa aktarma paneli",
+  "main": "src/main/main.js",
+  "author": "exseron",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "data:update": "node scripts/build-attack-data.js --download",
+    "data:build": "node scripts/build-attack-data.js",
+    "build:win": "electron-builder --config windows/electron-builder.yml --win",
+    "build:mac": "electron-builder --config mac/electron-builder.yml --mac",
+    "test": "node --test \"test/**/*.test.js\""
+  },
+  "devDependencies": {
+    "electron": "^45.0.0",
+    "electron-builder": "^26.0.12"
+  }
+}

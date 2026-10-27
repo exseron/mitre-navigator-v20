@@ -1,0 +1,284 @@
+/* ---------------------------------------------------------- matrix toolbar */
+.matrix-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  flex-wrap: wrap;
+}
+
+.search {
+  position: relative;
+  flex: 1 1 260px;
+  max-width: 420px;
+}
+
+.search svg {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: var(--text-3);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.search input {
+  width: 100%;
+  height: 32px;
+  padding: 0 10px 0 31px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  outline: none;
+}
+
+.search input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.matrix-stats {
+  margin-left: auto;
+  color: var(--text-3);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.matrix-stats b {
+  color: var(--text);
+}
+
+/* ------------------------------------------------------------------ matrix */
+.matrix-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 14px 16px 40px;
+}
+
+.matrix {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: max-content;
+}
+
+.matrix-empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-3);
+  width: 100%;
+}
+
+.tcol {
+  width: 182px;
+  flex: none;
+}
+
+.tcol__head {
+  position: sticky;
+  top: -14px;
+  z-index: 2;
+  padding: 9px 10px 8px;
+  margin-bottom: 6px;
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.tcol__head:hover {
+  border-color: var(--border-strong);
+}
+
+.tcol__head.is-selected {
+  background: var(--c);
+  border-color: var(--c);
+  color: var(--fg);
+}
+
+.tcol__name {
+  font-weight: 700;
+  font-size: 12.5px;
+  line-height: 1.25;
+}
+
+.tcol__meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3px;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.tcol__list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* ---------------------------------------------------------------- cells */
+.tcell {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--cell-bg);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.1s, box-shadow 0.1s, opacity 0.1s;
+}
+
+.tcell:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-1);
+}
+
+.tcell.is-selected {
+  background: var(--c);
+  border-color: var(--c);
+  color: var(--fg);
+}
+
+.tcell.is-focused {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+}
+
+.tcell.is-dim {
+  opacity: 0.32;
+}
+
+.tcell.is-match:not(.is-selected) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.tcell.has-selected-sub:not(.is-selected) {
+  border-left: 3px solid var(--sc, var(--accent));
+}
+
+.tcell__toggle {
+  flex: none;
+  width: 22px;
+  border: 0;
+  border-right: 1px solid rgba(127, 127, 127, 0.18);
+  background: transparent;
+  color: inherit;
+  opacity: 0.75;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  border-radius: 5px 0 0 5px;
+  padding: 0;
+  font-size: 10px;
+}
+
+.tcell__toggle:hover {
+  opacity: 1;
+  background: rgba(127, 127, 127, 0.12);
+}
+
+.tcell__toggle svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  transition: transform 0.12s;
+}
+
+.tcell.is-open > .tcell__toggle svg {
+  transform: rotate(90deg);
+}
+
+.tcell__main {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tcell__name {
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.tcell__id {
+  font-family: var(--mono);
+  font-size: 10px;
+  opacity: 0.6;
+  margin-top: 1px;
+}
+
+.tcell__badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 10px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 2px var(--bg);
+}
+
+.tcell__info {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: 5px;
+  background: rgba(127, 127, 127, 0.16);
+  color: inherit;
+  font: italic 700 11px/18px Georgia, serif;
+  cursor: pointer;
+  opacity: 0;
+  padding: 0;
+}
+
+.tcell:hover .tcell__info {
+  opacity: 0.85;
+}
+
+.tcell__info:hover {
+  opacity: 1 !important;
+  background: rgba(127, 127, 127, 0.3);
+}
+
+.tsubs {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0 0 4px 12px;
+  padding-left: 7px;
+  border-left: 2px solid var(--border);
+}
+
+.tcell--sub {
+  min-height: 28px;
+  background: var(--cell-sub-bg);
+}
+
+.tcell--sub .tcell__name {
+  font-size: 11.5px;
+}

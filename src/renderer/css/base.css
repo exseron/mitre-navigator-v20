@@ -1,0 +1,330 @@
+/* ------------------------------------------------------------------ tokens */
+:root {
+  color-scheme: light;
+  --font: 'Segoe UI Variable Text', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Roboto, Arial, sans-serif;
+  --mono: 'Cascadia Mono', 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --bg: #f4f6fa;
+  --bg-elev: #ffffff;
+  --bg-sunken: #eceff5;
+  --bg-hover: #e6eaf2;
+  --border: #dde2ec;
+  --border-strong: #c6cdda;
+  --text: #1c2333;
+  --text-2: #4d586d;
+  --text-3: #7d8799;
+  --accent: #3e63dd;
+  --accent-2: #2f50c0;
+  --accent-soft: #e4eafd;
+  --danger: #d93a3f;
+  --ok: #2f9a52;
+  --shadow-1: 0 1px 2px rgba(18, 25, 45, 0.06), 0 1px 1px rgba(18, 25, 45, 0.04);
+  --shadow-2: 0 8px 28px rgba(18, 25, 45, 0.14), 0 2px 6px rgba(18, 25, 45, 0.08);
+  --cell-bg: #ffffff;
+  --cell-sub-bg: #f7f8fb;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #0f1218;
+    --bg-elev: #171b24;
+    --bg-sunken: #12161e;
+    --bg-hover: #222836;
+    --border: #262d3b;
+    --border-strong: #353e50;
+    --text: #e6e9f0;
+    --text-2: #a9b1c2;
+    --text-3: #747e92;
+    --accent: #6e8cf5;
+    --accent-2: #8aa2ff;
+    --accent-soft: #1f2a4d;
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-2: 0 10px 34px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+    --cell-bg: #1a1f29;
+    --cell-sub-bg: #151922;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0f1218;
+  --bg-elev: #171b24;
+  --bg-sunken: #12161e;
+  --bg-hover: #222836;
+  --border: #262d3b;
+  --border-strong: #353e50;
+  --text: #e6e9f0;
+  --text-2: #a9b1c2;
+  --text-3: #747e92;
+  --accent: #6e8cf5;
+  --accent-2: #8aa2ff;
+  --accent-soft: #1f2a4d;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 10px 34px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --cell-bg: #1a1f29;
+  --cell-sub-bg: #151922;
+}
+
+/* ------------------------------------------------------------------- reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font: 13px/1.45 var(--font);
+  color: var(--text);
+  background: var(--bg);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+svg {
+  flex: none;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ------------------------------------------------------------ scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* --------------------------------------------------------------- controls */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  box-shadow: var(--shadow-1);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.btn:hover {
+  background: var(--bg-hover);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--accent-2);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.btn--danger {
+  color: var(--danger);
+}
+
+.btn--sm {
+  height: 26px;
+  padding: 0 9px;
+  font-size: 12px;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn svg,
+.icon-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-3);
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  border-radius: var(--radius-sm);
+  padding: 6px 9px;
+  outline: none;
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+.check input {
+  accent-color: var(--accent);
+  margin: 0;
+}
+
+.seg {
+  display: inline-flex;
+  padding: 2px;
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.seg__btn {
+  height: 26px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.seg__btn.is-active {
+  background: var(--bg-elev);
+  color: var(--text);
+  box-shadow: var(--shadow-1);
+  font-weight: 600;
+}
+
+.label {
+  display: block;
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-3);
+  text-transform: uppercase;
+}
+
+.muted {
+  color: var(--text-3);
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+.kbd {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg-sunken);
+}
+
+.swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+}
+
+.swatch.is-active::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 8px;
+  border: 2px solid var(--accent);
+}

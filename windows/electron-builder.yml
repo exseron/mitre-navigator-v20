@@ -1,0 +1,47 @@
+# Windows paketi: npm run build:win  (ya da windows\build.bat)
+appId: com.exseron.attack-ttp-panel
+# Windows denetimlerinde "&" kısayol harfi olarak yorumlandığı için (ör. kurulum
+# sihirbazındaki "Çalıştır" kutusu) Windows sürümünde ad "&" içermez.
+productName: ATTACK TTP Panel
+copyright: Copyright © 2026 exseron — MITRE ATT&CK® © The MITRE Corporation
+
+directories:
+  output: dist/windows
+  buildResources: build
+
+files:
+  - src/**/*
+  - build/icon.ico
+  - build/icon.png
+  - package.json
+  - "!**/*.map"
+
+win:
+  icon: build/icon.ico
+  target:
+    - target: nsis
+      arch: [x64, arm64]
+    - target: portable
+      arch: [x64]
+    - target: zip
+      arch: [x64]
+  artifactName: ATTACK-TTP-Panel-${version}-win-${arch}.${ext}
+  # Kod imzalama sertifikası varsa CSC_LINK / CSC_KEY_PASSWORD ortam değişkenleriyle verilir
+  signAndEditExecutable: true
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: ATTACK TTP Panel
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerLanguages: [tr_TR, en_US]
+  language: "1055"
+  artifactName: ATTACK-TTP-Panel-${version}-Setup-${arch}.${ext}
+  deleteAppDataOnUninstall: false
+
+portable:
+  artifactName: ATTACK-TTP-Panel-${version}-Portable.${ext}

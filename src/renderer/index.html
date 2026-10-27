@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' data: blob:"
+    />
+    <title>ATT&amp;CK TTP Panel</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/matrix.css" />
+    <link rel="stylesheet" href="css/panels.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+  </head>
+  <body>
+    <header class="titlebar" id="titlebar">
+      <div class="titlebar__traffic" aria-hidden="true"></div>
+      <div class="brand">
+        <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="2" y="2" width="12" height="12" rx="3" fill="#e5484d" />
+          <rect x="18" y="2" width="12" height="12" rx="3" fill="currentColor" opacity=".22" />
+          <rect x="2" y="18" width="12" height="12" rx="3" fill="currentColor" opacity=".22" />
+          <rect x="18" y="18" width="12" height="12" rx="3" fill="#f5a524" />
+        </svg>
+        <span class="brand__name">ATT&amp;CK TTP Panel</span>
+        <span class="brand__version" id="attack-version"></span>
+      </div>
+      <div class="titlebar__doc">
+        <span class="doc-name" id="doc-name">Adsız proje</span>
+        <span class="doc-dirty" id="doc-dirty" title="Kaydedilmemiş değişiklikler">●</span>
+      </div>
+      <nav class="toolbar" aria-label="Araç çubuğu">
+        <button class="tb-btn" data-action="new" title="Yeni proje">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg><span>Yeni</span>
+        </button>
+        <button class="tb-btn" data-action="open" title="Proje aç">
+          <svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span>Aç</span>
+        </button>
+        <button class="tb-btn" data-action="save" title="Kaydet">
+          <svg viewBox="0 0 24 24"><path d="M5 3h11l3 3v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z M7 3v5h8V3 M7 21v-7h10v7" /></svg><span>Kaydet</span>
+        </button>
+        <span class="tb-sep"></span>
+        <button class="tb-btn" data-action="undo" title="Geri al">
+          <svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5 M4 9h10a6 6 0 0 1 0 12h-3" /></svg>
+        </button>
+        <button class="tb-btn" data-action="redo" title="Yinele">
+          <svg viewBox="0 0 24 24"><path d="m15 14 5-5-5-5 M20 9H10a6 6 0 0 0 0 12h3" /></svg>
+        </button>
+        <span class="tb-sep"></span>
+        <button class="tb-btn" data-action="importLayer" title="ATT&amp;CK Navigator katmanı içe aktar">
+          <svg viewBox="0 0 24 24"><path d="M12 3v12 M7 10l5 5 5-5 M4 21h16" /></svg><span>Katman</span>
+        </button>
+        <button class="tb-btn" data-action="theme" title="Tema (Otomatik / Açık / Koyu)">
+          <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" /></svg>
+        </button>
+        <button class="tb-btn tb-btn--primary" data-action="preview" title="Görsel önizleme ve dışa aktarma">
+          <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z M4 15l4-4 4 4 3-3 5 5" /></svg><span>Görsel Oluştur</span>
+        </button>
+      </nav>
+      <div class="titlebar__overlay" aria-hidden="true"></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="sidebar" id="sidebar"></aside>
+
+      <main class="matrix-area">
+        <div class="matrix-toolbar">
+          <label class="search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            <input id="search" type="search" placeholder="Teknik ara (ad veya ID, ör. T1059, phishing)…" autocomplete="off" />
+          </label>
+          <div class="seg" role="group" aria-label="Görünüm">
+            <button class="seg__btn" data-view="all">Tümü</button>
+            <button class="seg__btn" data-view="selected">Sadece seçilenler</button>
+          </div>
+          <label class="check">
+            <input type="checkbox" id="opt-subs" />
+            <span>Alt teknikleri aç</span>
+          </label>
+          <label class="check" title="Bir tekniği seçtiğinizde ait olduğu tüm taktik sütunlarında seçilir">
+            <input type="checkbox" id="opt-across" />
+            <span>Tüm taktiklerde seç</span>
+          </label>
+          <div class="matrix-stats" id="matrix-stats"></div>
+        </div>
+        <div class="matrix-scroll" id="matrix-scroll">
+          <div class="matrix" id="matrix"></div>
+        </div>
+      </main>
+
+      <aside class="details" id="details"></aside>
+    </div>
+
+    <div class="modal" id="export-modal" hidden></div>
+    <div class="toast-host" id="toast-host" aria-live="polite"></div>
+    <input type="file" id="file-input" hidden />
+
+    <script src="data/attack-data.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/files.js"></script>
+    <script src="js/layer-io.js"></script>
+    <script src="js/matrix.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/details.js"></script>
+    <script src="js/exporter.js"></script>
+    <script src="js/table-export.js"></script>
+    <script src="js/export-modal.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
