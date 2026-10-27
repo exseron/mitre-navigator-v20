@@ -123,13 +123,8 @@
     const canvas = modal.querySelector('#preview-canvas');
     const scroll = modal.querySelector('#preview-scroll');
     if (current.empty) {
-      canvas.innerHTML = '';
       canvas.style.boxShadow = 'none';
-      canvas.insertAdjacentHTML(
-        'afterend',
-        ''
-      );
-      canvas.innerHTML = `<div class="preview-empty" style="line-height:1.5"><strong>Henüz seçim yok.</strong><br/>Matristen teknik seçin ya da bir tehdit profili içe aktarın; görsel burada oluşur.</div>`;
+      canvas.innerHTML = `<div class="preview-empty"><strong>Henüz seçim yok.</strong><br/>Matristen teknik seçin ya da bir tehdit profili içe aktarın; görsel burada oluşur.</div>`;
     } else {
       canvas.style.boxShadow = '';
       canvas.innerHTML = current.svg;
