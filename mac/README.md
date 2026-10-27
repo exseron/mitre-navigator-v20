@@ -49,8 +49,7 @@ MAC_SIGN_IDENTITY="Developer ID Application: Adınız (TEAMID)" ./mac/build.sh
 - Entegre başlık çubuğu: trafik ışıkları (kapat / küçült / tam ekran) araç çubuğunun içindedir.
 - Standart uygulama menüsü (Hakkında, Servisler, Gizle, Çık) ve `⌘` kısayolları
   (`⌘S` kaydet, `⌘E` görsel oluştur, `⇧⌘Z` yinele…).
-- Kaydedilmemiş değişiklik olduğunda pencerenin kapat düğmesinde nokta görünür ve
-  pencere, Görev Yöneticisi / Mission Control'de açık dosyayı temsil eder.
+- Kaydedilmemiş değişiklik olduğunda pencerenin kapat düğmesinde nokta görünür.
 - Pencere kapatılsa da uygulama Dock'ta açık kalır (`⌘Q` ile çıkılır).
 - Proje dosyalarını Dock simgesine sürükleyerek veya **Birlikte Aç** menüsünden açabilirsiniz.
 - Görsel kaydedildikten sonra **Klasörde göster** dosyayı Finder'da seçili gösterir.
