@@ -43,6 +43,12 @@
     return downloadBlob(defaultName, new Blob([text], { type: mime + ';charset=utf-8' }));
   }
 
+  /** Daha önce kaydedilmiş/açılmış bir yola doğrudan yazar (yalnızca masaüstü). */
+  async function overwrite(filePath, text) {
+    if (!desktop || !filePath) return null;
+    return desktop.writeFile(filePath, text);
+  }
+
   async function saveBase64(defaultName, base64, filters, mime) {
     if (desktop) return desktop.saveFile({ defaultPath: defaultName, filters, data: base64, encoding: 'base64' });
     return downloadBlob(defaultName, base64ToBlob(base64, mime));
@@ -71,5 +77,5 @@
     return p ? String(p).split(/[\\/]/).pop() : p;
   }
 
-  TTP.files = { FILTERS, saveText, saveBase64, openText, basename, isDesktop: !!desktop };
+  TTP.files = { FILTERS, saveText, overwrite, saveBase64, openText, basename, isDesktop: !!desktop };
 })();

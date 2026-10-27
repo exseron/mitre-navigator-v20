@@ -12,6 +12,7 @@ contextBridge.exposeInMainWorld('desktop', {
   info: () => ipcRenderer.invoke('app:info'),
   saveFile: (options) => ipcRenderer.invoke('file:save', options),
   openFile: (options) => ipcRenderer.invoke('file:open', options),
+  writeFile: (filePath, data) => ipcRenderer.invoke('file:write', { filePath, data }),
   reveal: (filePath) => ipcRenderer.invoke('file:reveal', filePath),
   setWindowState: (state) => ipcRenderer.send('window:state', state),
   onMenuAction: (callback) => {

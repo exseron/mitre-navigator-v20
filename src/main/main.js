@@ -87,6 +87,9 @@ function sendMenuAction(action) {
 
 /* ------------------------------------------------------------------ IPC */
 
+// Yalnızca kullanıcının diyalogla seçtiği yollara doğrudan yazılabilir
+const approvedPaths = new Set();
+
 ipcMain.handle('app:info', () => ({
   platform: process.platform,
   version: app.getVersion(),
@@ -102,6 +105,13 @@ ipcMain.handle('file:save', async (event, { defaultPath, filters, data, encoding
   if (canceled || !filePath) return null;
   const buffer = encoding === 'base64' ? Buffer.from(data, 'base64') : Buffer.from(data, 'utf8');
   await fs.promises.writeFile(filePath, buffer);
+  approvedPaths.add(filePath);
+  return filePath;
+});
+
+ipcMain.handle('file:write', async (_event, { filePath, data }) => {
+  if (!approvedPaths.has(filePath)) throw new Error('Bu dosyaya yazma izni yok');
+  await fs.promises.writeFile(filePath, data, 'utf8');
   return filePath;
 });
 
@@ -113,6 +123,7 @@ ipcMain.handle('file:open', async (event, { filters }) => {
   });
   if (canceled || !filePaths.length) return null;
   const content = await fs.promises.readFile(filePaths[0], 'utf8');
+  approvedPaths.add(filePaths[0]);
   return { path: filePaths[0], name: path.basename(filePaths[0]), content };
 });
 

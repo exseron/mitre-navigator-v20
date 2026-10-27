@@ -30,8 +30,9 @@ function buildMenu({ isMac, send }) {
   const editMenu = {
     label: 'Düzen',
     submenu: [
-      { role: 'undo', label: 'Geri Al' },
-      { role: 'redo', label: 'Yinele' },
+      // Metin alanında metin geri alınır, aksi halde seçim geçmişi (renderer karar verir)
+      item('Geri Al', 'undo', 'CmdOrCtrl+Z'),
+      item('Yinele', 'redo', isMac ? 'Shift+Cmd+Z' : 'Ctrl+Y'),
       { type: 'separator' },
       { role: 'cut', label: 'Kes' },
       { role: 'copy', label: 'Kopyala' },
