@@ -209,7 +209,7 @@
     const body = [];
     const procBlock = (procs, indent, bullet) => {
       for (const p of procs) {
-        const tl = wrap(p.text, F.proc, inner - indent - 11);
+        const tl = wrap(p.text, F.proc, inner - indent - 11, opts.procedureLines > 0 ? opts.procedureLines : Infinity);
         const sl = opts.showProcedureSource && p.source ? wrap('— ' + p.source, F.procSource, inner - indent - 11) : [];
         const h = tl.length * 16 + sl.length * 14;
         body.push({

@@ -53,6 +53,16 @@
         ).join('')}</div>
       </section>
       <section class="panel-section">
+        <h3 class="panel-title">Prosedür uzunluğu</h3>
+        ${seg('procedureLines', o.procedureLines, [
+          [0, 'Tam metin'],
+          [4, '4 satır'],
+          [2, '2 satır'],
+          [1, '1 satır'],
+        ])}
+        <p class="hint">Uzun MITRE prosedürleri olan büyük profillerde görseli kompakt tutar.</p>
+      </section>
+      <section class="panel-section">
         <h3 class="panel-title">${o.layout === 'flow' ? 'Kart genişliği' : 'Sütun genişliği'}</h3>
         <div class="range-row">
           <input type="range" min="200" max="420" step="10" value="${o.columnWidth}" data-range="columnWidth" />
@@ -247,7 +257,8 @@
         segBtn.parentElement.querySelectorAll('.seg__btn').forEach((b) => b.classList.toggle('is-active', b === segBtn));
         return renderPreview();
       }
-      store.setExportOptions({ [name]: name === 'pngScale' ? Number(raw) : raw });
+      const numeric = name === 'pngScale' || name === 'procedureLines';
+      store.setExportOptions({ [name]: numeric ? Number(raw) : raw });
       return refreshOptions();
     }
     const exp = e.target.closest('[data-export]');

@@ -25,6 +25,7 @@
     theme: 'light', // light | dark
     showProcedures: true,
     showProcedureSource: true,
+    procedureLines: 0, // 0 = tam metin, aksi halde prosedür başına en fazla satır
     showIds: true,
     showKillChain: true,
     showLegend: true,
