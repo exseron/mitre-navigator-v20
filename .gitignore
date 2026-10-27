@@ -1,0 +1,10 @@
+node_modules/
+dist/
+out/
+.cache/
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+# raw STIX bundle downloaded by scripts/build-attack-data.js
+data/raw/
