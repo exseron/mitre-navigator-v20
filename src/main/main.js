@@ -12,6 +12,14 @@ if (IS_WIN) app.setAppUserModelId('com.exseron.attack-ttp-panel');
 
 /** @type {BrowserWindow | null} */
 let mainWindow = null;
+/** Pencere hazır olmadan istenen dosya (macOS "Birlikte Aç" / Windows komut satırı) */
+let pendingFile = null;
+let rendererReady = false;
+
+// Tek örnek: ikinci kez açılan uygulama dosyasını mevcut pencereye iletir
+if (!app.requestSingleInstanceLock()) {
+  app.quit();
+}
 
 function platformWindowOptions() {
   if (IS_MAC) {
@@ -75,8 +83,13 @@ function createWindow() {
     }
   });
 
+  mainWindow.webContents.on('did-start-loading', () => {
+    rendererReady = false;
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
+    rendererReady = false;
   });
 }
 
@@ -85,10 +98,56 @@ function sendMenuAction(action) {
   if (win) win.webContents.send('menu:action', action);
 }
 
+/* ------------------------------------------------------- dosyayla açma */
+
+function fileFromArgv(argv) {
+  return argv.slice(1).find((a) => /\.json$/i.test(a) && fs.existsSync(a)) || null;
+}
+
+async function openPath(filePath) {
+  if (!filePath) return;
+  if (!mainWindow || !rendererReady) {
+    pendingFile = filePath;
+    return;
+  }
+  try {
+    const content = await fs.promises.readFile(filePath, 'utf8');
+    approvedPaths.add(filePath);
+    mainWindow.webContents.send('file:opened', { path: filePath, name: path.basename(filePath), content });
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
+  } catch (err) {
+    dialog.showErrorBox('Dosya açılamadı', `${filePath}\n\n${err.message}`);
+  }
+}
+
+app.on('open-file', (event, filePath) => {
+  event.preventDefault();
+  openPath(filePath);
+});
+
+app.on('second-instance', (_event, argv) => {
+  const file = fileFromArgv(argv);
+  if (file) openPath(file);
+  else if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
+  }
+});
+
 /* ------------------------------------------------------------------ IPC */
 
 // Yalnızca kullanıcının diyalogla seçtiği yollara doğrudan yazılabilir
 const approvedPaths = new Set();
+
+ipcMain.on('renderer:ready', () => {
+  rendererReady = true;
+  if (pendingFile) {
+    const file = pendingFile;
+    pendingFile = null;
+    openPath(file);
+  }
+});
 
 ipcMain.handle('app:info', () => ({
   platform: process.platform,
@@ -148,6 +207,7 @@ nativeTheme.on('updated', () => {
 /* ------------------------------------------------------------ lifecycle */
 
 app.whenReady().then(() => {
+  if (!IS_MAC) pendingFile = pendingFile || fileFromArgv(process.argv);
   buildMenu({ isMac: IS_MAC, send: sendMenuAction });
   createWindow();
 

@@ -232,7 +232,13 @@
     }
   });
 
-  if (desktop) desktop.onMenuAction(run);
+  if (desktop) {
+    desktop.onMenuAction(run);
+    // Finder'da "Birlikte Aç", Dock'a sürükleme ya da Windows'ta "Birlikte aç" ile gelen dosyalar
+    desktop.onFileOpened((file) => {
+      if (confirmDiscard()) loadJson(file);
+    });
+  }
 
   // Tarayıcıda menü yoktur; kısayollar burada yakalanır
   const SHORTCUTS = {
@@ -293,6 +299,7 @@
 
   applyTheme();
   renderAll();
+  if (desktop) desktop.ready();
 
   TTP.app = { run, platform };
 })();

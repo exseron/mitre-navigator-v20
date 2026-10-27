@@ -15,6 +15,12 @@ contextBridge.exposeInMainWorld('desktop', {
   writeFile: (filePath, data) => ipcRenderer.invoke('file:write', { filePath, data }),
   reveal: (filePath) => ipcRenderer.invoke('file:reveal', filePath),
   setWindowState: (state) => ipcRenderer.send('window:state', state),
+  onFileOpened: (callback) => {
+    const listener = (_event, file) => callback(file);
+    ipcRenderer.on('file:opened', listener);
+    return () => ipcRenderer.removeListener('file:opened', listener);
+  },
+  ready: () => ipcRenderer.send('renderer:ready'),
   onMenuAction: (callback) => {
     const listener = (_event, action) => callback(action);
     ipcRenderer.on('menu:action', listener);
