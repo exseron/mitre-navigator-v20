@@ -186,7 +186,6 @@
     proc: font(11.5),
     procSource: font(10.5, 400, FONT, 'italic'),
     techDesc: font(11, 400, FONT, 'italic'),
-    kc: font(10.5, 700),
     legendTitle: font(11, 700),
     legend: font(12, 500),
     footer: font(11),
@@ -347,6 +346,17 @@
     return { height: h, draw: (x, y) => out.map((fn) => fn(x, y)).join('') };
   }
 
+  /** Taktik adını kelime bölmeden en fazla 2 satıra sığdırmak için yazı boyutunu küçültür. */
+  function fitLabel(text, maxWidth) {
+    for (const size of [10.5, 9.5, 8.5, 7.5]) {
+      const f = font(size, 700);
+      const fits = text.split(/\s+/).every((w) => measure(w, f) <= maxWidth);
+      const list = wrap(text, f, maxWidth, 2);
+      if (fits && !list[list.length - 1].endsWith('…')) return { list, f };
+    }
+    return { list: wrap(text, font(7.5, 700), maxWidth, 2), f: font(7.5, 700) };
+  }
+
   function killChainSection(columns, theme, width) {
     const used = new Map(columns.filter((c) => c.selected).map((c) => [c.tactic.short, c]));
     const n = data.tactics.length;
@@ -366,10 +376,11 @@
           const tipPts = i === n - 1 ? `L${r(sx + segW)},${r(y)} L${r(sx + segW)},${r(y + h)}` : `L${r(sx + segW - tip)},${r(y)} L${r(sx + segW)},${r(y + h / 2)} L${r(sx + segW - tip)},${r(y + h)}`;
           const start = i === 0 ? `L${r(sx)},${r(y + h)} Z` : `L${r(sx - tip + gap)},${r(y + h)}${notch} Z`;
           const path = `<path d="${left} ${tipPts} ${start}" fill="${fill}"/>`;
-          const tl = wrap(t.name, F.kc, segW - (i === 0 ? 10 : 16) - tip, 2);
+          const { list: tl, f } = fitLabel(t.name, segW - (i === 0 ? 10 : 16) - tip);
           const cx = sx + (i === 0 ? segW / 2 - tip / 2 : segW / 2);
-          const ty = y + (h - tl.length * 13) / 2;
-          return path + lines(cx, ty, tl, F.kc, 13, fg, ' text-anchor="middle"');
+          const lh = f.size + 2.5;
+          const ty = y + (h - tl.length * lh) / 2;
+          return path + lines(cx, ty, tl, f, lh, fg, ' text-anchor="middle"');
         })
         .join('');
     return { height: h, draw };
