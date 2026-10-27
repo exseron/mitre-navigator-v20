@@ -452,3 +452,13 @@
   color: var(--text-3);
   margin: 6px 0 0;
 }
+
+/* Lejant satırında düzenleme düğmeleri yalnızca üzerine gelince görünür */
+.legend-item .icon-btn {
+  display: none;
+}
+
+.legend-item:hover .icon-btn,
+.legend-item:focus-within .icon-btn {
+  display: inline-grid;
+}
